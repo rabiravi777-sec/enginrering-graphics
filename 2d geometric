@@ -1,0 +1,103 @@
+import turtle
+import math
+
+# Screen
+screen = turtle.Screen()
+screen.setup(900, 650)
+screen.title("2D Geometric Transformations Using Matrices")
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+
+# Original triangle
+P = [[0, 0, 100, 50, 50, 120, 0, 0]]
+
+# Matrix multiplication for one point
+def transform(x, y, M):
+    X = M[0][0] * x + M[0][1] * y + M[0][2]
+    Y = M[1][0] * x + M[1][1] * y + M[1][2]
+    return X, Y
+
+# Draw triangle
+def draw_triangle(points, ox, oy):
+    t.penup()
+    t.goto(points[0][0] + ox, points[0][1] + oy)
+    t.pendown()
+
+    for x, y in points[1:]:
+        t.goto(x + ox, y + oy)
+
+    t.goto(points[0][0] + ox, points[0][1] + oy)
+
+# Original points
+points = [(0, 0), (100, 50), (50, 120)]
+
+# Translation matrix
+T = [
+    [1, 0, 150],
+    [0, 1, 50],
+    [0, 0, 1]
+]
+
+# Scaling matrix
+S = [
+    [1.5, 0, 0],
+    [0, 1.5, 0],
+    [0, 0, 1]
+]
+
+# Rotation matrix
+a = math.radians(45)
+R = [
+    [math.cos(a), -math.sin(a), 0],
+    [math.sin(a), math.cos(a), 0],
+    [0, 0, 1]
+]
+
+# Reflection about X-axis
+F = [
+    [1, 0, 0],
+    [0, -1, 0],
+    [0, 0, 1]
+]
+
+# Shearing matrix
+H = [
+    [1, 0.5, 0],
+    [0, 1, 0],
+    [0, 0, 1]
+]
+
+# Apply matrices
+translated = [transform(x, y, T) for x, y in points]
+scaled = [transform(x, y, S) for x, y in points]
+rotated = [transform(x, y, R) for x, y in points]
+reflected = [transform(x, y, F) for x, y in points]
+sheared = [transform(x, y, H) for x, y in points]
+
+# Draw transformations
+draw_triangle(points, -350, 150)
+draw_triangle(translated, -100, 150)
+draw_triangle(scaled, 180, 150)
+draw_triangle(rotated, -250, -180)
+draw_triangle(reflected, 50, -180)
+draw_triangle(sheared, 250, -180)
+
+# Labels
+labels = [
+    ("Original", -350, 280),
+    ("Translation", -100, 280),
+    ("Scaling", 180, 280),
+    ("Rotation", -250, -250),
+    ("Reflection", 50, -250),
+    ("Shearing", 250, -250)
+]
+
+for text, x, y in labels:
+    t.penup()
+    t.goto(x, y)
+    t.write(text, font=("Arial", 12, "bold"))
+
+t.hideturtle()
+screen.mainloop()
