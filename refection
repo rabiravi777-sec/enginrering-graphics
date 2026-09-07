@@ -1,0 +1,45 @@
+import tkinter as tk
+
+# Window
+root = tk.Tk()
+root.title("Reflection and Shearing Transformation")
+
+canvas = tk.Canvas(root, width=700, height=600, bg="white")
+canvas.pack()
+
+# Convert mathematical coordinates to screen coordinates
+def point(x, y):
+    return 350 + x * 50, 300 - y * 50
+
+# Original triangle
+original = [(1, 1), (4, 1), (2, 4)]
+
+# Reflection about X-axis
+reflected = [(x, -y) for x, y in original]
+
+# X-shearing: x' = x + y
+sheared = [(x + y, y) for x, y in original]
+
+# Draw axes
+canvas.create_line(0, 300, 700, 300, fill="black")
+canvas.create_line(350, 0, 350, 600, fill="black")
+
+# Draw triangle function
+def draw_triangle(points, color):
+    coords = []
+    for x, y in points:
+        coords.extend(point(x, y))
+
+    canvas.create_polygon(coords, outline=color, fill="", width=3)
+
+# Draw objects
+draw_triangle(original, "blue")
+draw_triangle(reflected, "red")
+draw_triangle(sheared, "green")
+
+# Labels
+canvas.create_text(100, 30, text="Blue = Original", fill="blue")
+canvas.create_text(300, 30, text="Red = Reflection", fill="red")
+canvas.create_text(500, 30, text="Green = Shearing", fill="green")
+
+root.mainloop()
