@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Values of k
+k_values = [-3, -2, -1, 0, 1, 2, 3]
+
+# Draw vertical lines: x = k
+for k in k_values:
+    plt.axvline(x=k, label=f"x = {k}")
+
+# Draw horizontal lines: y = k
+for k in k_values:
+    plt.axhline(y=k, label=f"y = {k}")
+
+# Set graph limits
+plt.xlim(-5, 5)
+plt.ylim(-5, 5)
+
+# Labels and title
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Star Pattern using x = k and y = k")
+
+# Grid
+plt.grid(True)
+
+# Show graph
+plt.show()
