@@ -1,0 +1,149 @@
+import pygame
+import sys
+
+pygame.init()
+
+# Window size
+WIDTH = 280
+HEIGHT = 219
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Circle Design")
+
+# Colors
+BACKGROUND = (23, 23, 23)
+BLACK = (0, 0, 0)
+WHITE = (252, 252, 252)
+YELLOW = (255, 215, 0)
+ORANGE = (255, 140, 0)
+
+# --------------------------------------------------
+# DRAW EVERYTHING ON A HIGH-RES SURFACE
+# --------------------------------------------------
+
+SCALE = 4
+
+big = pygame.Surface(
+    (WIDTH * SCALE, HEIGHT * SCALE),
+    pygame.SRCALPHA
+)
+
+# Background
+big.fill(BACKGROUND)
+
+# --------------------------------------------------
+# BLACK ROUNDED RECTANGLE
+# --------------------------------------------------
+
+pygame.draw.rect(
+    big,
+    BLACK,
+    (
+        20 * SCALE,
+        13 * SCALE,
+        218 * SCALE,
+        206 * SCALE
+    ),
+    border_radius=16 * SCALE
+)
+
+# --------------------------------------------------
+# CIRCLE
+# --------------------------------------------------
+
+cx = 129 * SCALE
+cy = 119 * SCALE
+radius = 71 * SCALE
+
+pygame.draw.circle(
+    big,
+    WHITE,
+    (cx, cy),
+    radius
+)
+
+# --------------------------------------------------
+# STRIPE SURFACE
+# --------------------------------------------------
+
+stripe_surface = pygame.Surface(
+    big.get_size(),
+    pygame.SRCALPHA
+)
+
+# --------------------------------------------------
+# STRIPE 1 (Yellow, shifted upward)
+# --------------------------------------------------
+
+pygame.draw.polygon(
+    stripe_surface,
+    YELLOW,
+    [
+        (55 * SCALE, 150 * SCALE),
+        (68 * SCALE, 163 * SCALE),
+        (177 * SCALE, 54 * SCALE),
+        (164 * SCALE, 41 * SCALE)
+    ]
+)
+
+# --------------------------------------------------
+# STRIPE 2 (Orange, shifted downward)
+# --------------------------------------------------
+
+pygame.draw.polygon(
+    stripe_surface,
+    ORANGE,
+    [
+        (77 * SCALE, 191 * SCALE),
+        (90 * SCALE, 204 * SCALE),
+        (199 * SCALE, 95 * SCALE),
+        (186 * SCALE, 82 * SCALE)
+    ]
+)
+
+# --------------------------------------------------
+# CIRCLE MASK
+# --------------------------------------------------
+
+mask = pygame.Surface(
+    big.get_size(),
+    pygame.SRCALPHA
+)
+
+pygame.draw.circle(
+    mask,
+    (255, 255, 255, 255),
+    (cx, cy),
+    radius
+)
+
+stripe_surface.blit(
+    mask,
+    (0, 0),
+    special_flags=pygame.BLEND_RGBA_MULT
+)
+
+# Put stripes over circle
+big.blit(stripe_surface, (0, 0))
+
+# --------------------------------------------------
+# SCALE DOWN FOR SMOOTH EDGES
+# --------------------------------------------------
+
+final_image = pygame.transform.smoothscale(
+    big,
+    (WIDTH, HEIGHT)
+)
+
+# --------------------------------------------------
+# MAIN LOOP
+# --------------------------------------------------
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    screen.blit(final_image, (0, 0))
+    pygame.display.flip()
