@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Radius
+r = 50
+
+# Center positions on vertical line
+ki_values = [-200, -100, 0, 100, 200]
+
+# Angle values
+theta = np.linspace(0, 2 * np.pi, 500)
+
+# Draw circles
+for ki in ki_values:
+    x = r * np.cos(theta)
+    y = ki + r * np.sin(theta)
+
+    plt.plot(x, y, label=f"k = {ki}")
+
+# Draw vertical line x = 0
+plt.axvline(0)
+
+# Equal scale
+plt.axis("equal")
+
+# Labels and title
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Circles Along Vertical Line")
+
+plt.grid(True)
+plt.legend()
+
+# Display graph
+plt.show()
