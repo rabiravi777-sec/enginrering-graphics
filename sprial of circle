@@ -1,0 +1,53 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Center of flower
+hc = 0
+kc = 0
+
+# Parameters
+a = 100
+r0 = 20
+b = 5
+
+# Number of petals
+n = 12
+
+# Angle between circles
+theta = 2 * np.pi / n
+
+# Angle for drawing each circle
+t = np.linspace(0, 2 * np.pi, 300)
+
+# Draw flower pattern
+for i in range(n):
+
+    # Angle of each circle
+    theta_i = i * theta
+
+    # Center of each circle
+    hi = hc + a * np.cos(theta_i)
+    ki = kc + a * np.sin(theta_i)
+
+    # Increasing radius
+    ri = r0 + b * i
+
+    # Circle equation
+    x = hi + ri * np.cos(t)
+    y = ki + ri * np.sin(t)
+
+    plt.plot(x, y)
+
+# Center circle
+x = hc + r0 * np.cos(t)
+y = kc + r0 * np.sin(t)
+plt.plot(x, y)
+
+# Graph settings
+plt.axis("equal")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Flower Pattern")
+
+plt.grid(True)
+plt.show()
