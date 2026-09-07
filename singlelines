@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Values of x
+x = np.linspace(-10, 10, 100)
+
+# Equation: y = 2x + 1
+y = 2*x + 1
+
+# Draw the line
+plt.plot(x, y)
+
+# Add axes
+plt.axhline(0)
+plt.axvline(0)
+
+# Labels
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Straight Line: y = 2x + 1")
+
+# Grid
+plt.grid(True)
+
+# Show graph
+plt.show()
