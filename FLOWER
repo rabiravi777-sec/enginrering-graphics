@@ -1,0 +1,49 @@
+import pygame
+import math
+import sys
+
+pygame.init()
+
+# Window setup
+WIDTH, HEIGHT = 600, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Flower Pattern with Circles")
+
+# Colors
+WHITE = (0, 0, 0)
+BLACK = (245, 245, 245)
+
+clock = pygame.time.Clock()
+
+# Circle settings
+cx, cy = WIDTH // 2, HEIGHT // 2   # center of window
+radius = 100                       # radius of each circle
+num_circles = 6                    # number of surrounding circles
+
+# Distance from center to each circle center
+distance = radius                  # equal to radius for overlapping
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Background
+    screen.fill(BLACK)
+
+    # Draw central circle
+    pygame.draw.circle(screen, WHITE, (cx, cy), radius, 2)
+
+    # Draw surrounding circles
+    for i in range(num_circles):
+        angle = math.radians(i * 60)  # 360° / 6 = 60° spacing
+        x = cx + distance * math.cos(angle)
+        y = cy + distance * math.sin(angle)
+        pygame.draw.circle(screen, WHITE, (int(x), int(y)), radius, 2)
+
+    pygame.display.flip()
+    clock.tick(60)
+
+pygame.quit()
+sys.exit()
