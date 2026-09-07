@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Center
+h = 0
+k = 0
+
+# Initial radius and increment
+r0 = 20
+n = 20
+
+# Angle
+theta = np.linspace(0, 2 * np.pi, 500)
+
+# Draw circles for i = 0,1,2,3,4
+for i in range(5):
+    r = r0 + i * n
+
+    x = h + r * np.cos(theta)
+    y = k + r * np.sin(theta)
+
+    plt.plot(x, y, label=f"i = {i}, r = {r}")
+
+plt.axis("equal")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Increasing Size Circles")
+
+plt.grid(True)
+plt.legend()
+plt.show()
