@@ -1,0 +1,36 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Addition of Two Numbers - Flowchart")
+root.geometry("600x700")
+
+canvas = tk.Canvas(root, width=600, height=700, bg="white")
+canvas.pack()
+
+# Start
+canvas.create_oval(220, 30, 380, 90, fill="lightgreen", outline="black")
+canvas.create_text(300, 60, text="START", font=("Arial", 14, "bold"))
+
+# Input
+canvas.create_rectangle(180, 140, 420, 210, fill="lightblue", outline="black")
+canvas.create_text(300, 175, text="Input A and B", font=("Arial", 14, "bold"))
+
+# Addition
+canvas.create_rectangle(180, 260, 420, 330, fill="yellow", outline="black")
+canvas.create_text(300, 295, text="Sum = A + B", font=("Arial", 14, "bold"))
+
+# Output
+canvas.create_rectangle(180, 380, 420, 450, fill="orange", outline="black")
+canvas.create_text(300, 415, text="Display Sum", font=("Arial", 14, "bold"))
+
+# End
+canvas.create_oval(220, 500, 380, 560, fill="lightgreen", outline="black")
+canvas.create_text(300, 530, text="END", font=("Arial", 14, "bold"))
+
+# Arrows
+canvas.create_line(300, 90, 300, 140, arrow=tk.LAST, width=2)
+canvas.create_line(300, 210, 300, 260, arrow=tk.LAST, width=2)
+canvas.create_line(300, 330, 300, 380, arrow=tk.LAST, width=2)
+canvas.create_line(300, 450, 300, 500, arrow=tk.LAST, width=2)
+
+root.mainloop()
