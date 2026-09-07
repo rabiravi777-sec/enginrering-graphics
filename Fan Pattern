@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Values of x
+x = np.linspace(-10, 10, 100)
+
+# Different slopes
+m_values = [-3, -2, -1, 0, 1, 2, 3]
+
+# Draw the fan of lines
+for m in m_values:
+    y = m * x
+    plt.plot(x, y, label=f"y = {m}x")
+
+# Draw X and Y axes
+plt.axhline(0)
+plt.axvline(0)
+
+# Labels and title
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Fan Pattern: y = mx")
+
+# Grid and legend
+plt.grid(True)
+plt.legend()
+
+# Show graph
+plt.show()
