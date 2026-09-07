@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Values of x
+x = np.linspace(-10, 10, 100)
+
+# Different slopes
+m_values = [-2, -1, 0, 1, 2]
+
+# Draw lines
+for m in m_values:
+    y = m * x + 1
+    plt.plot(x, y, label=f"y = {m}x + 1")
+
+# Draw axes
+plt.axhline(0)
+plt.axvline(0)
+
+# Labels and title
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Family of Lines with Same Intercept")
+
+# Grid and legend
+plt.grid(True)
+plt.legend()
+
+# Display graph
+plt.show()
