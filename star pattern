@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Values of x
+x = np.linspace(-10, 10, 100)
+
+# Lines
+y1 = x
+y2 = -x
+
+# Draw lines
+plt.plot(x, y1, label="y = x")
+plt.plot(x, y2, label="y = -x")
+
+# Draw y = 0 (x-axis)
+plt.axhline(0, label="y = 0")
+
+# Draw x = 0 (y-axis)
+plt.axvline(0, label="x = 0")
+
+# Set limits
+plt.xlim(-10, 10)
+plt.ylim(-10, 10)
+
+# Labels
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Star Pattern")
+
+# Grid and legend
+plt.grid(True)
+plt.legend()
+
+# Show graph
+plt.show()
