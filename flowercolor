@@ -1,0 +1,64 @@
+import turtle
+import math
+
+screen = turtle.Screen()
+screen.setup(width=800, height=800)
+screen.tracer(0)
+
+t = turtle.Turtle()
+t.pensize(2)
+
+R = 120
+num_outer = 6
+
+colors = [
+    "#18EC2A",
+    "#8E9E00",
+    "#828D94",
+    "#00E0EC",
+    "#1043EC",
+    "#BB00FF",
+    "#E60B0B",
+    "#000000"
+]
+
+def draw_filled_circle(t, cx, cy, radius, fill_col):
+    t.up()
+    t.goto(cx, cy - radius)
+    t.setheading(0)
+    t.fillcolor(fill_col)
+    t.pencolor("black")
+    t.down()
+    t.begin_fill()
+    t.circle(radius)
+    t.end_fill()
+
+def draw_lens(t, R, angle):
+    cx = R * math.cos(math.radians(angle))
+    cy = R * math.sin(math.radians(angle))
+    t.up()
+    t.goto(0, 0)
+    t.setheading(angle + 30)
+    t.down()
+    t.begin_fill()
+    t.circle(R, 60)
+    t.left(120)
+    t.circle(R, 60)
+    t.end_fill()
+
+for i in range(num_outer):
+    angle = i * 60
+    cx = R * math.cos(math.radians(angle))
+    cy = R * math.sin(math.radians(angle))
+    draw_filled_circle(t, cx, cy, R, colors[i])
+
+draw_filled_circle(t, 0, 0, R, colors[6])
+
+t.fillcolor(colors[7])
+t.pencolor("black")
+for i in range(num_outer):
+    draw_lens(t, R, i * 60)
+
+t.hideturtle()
+screen.update()
+turtle.done()
