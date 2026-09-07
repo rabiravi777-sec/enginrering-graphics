@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Center of the ring
+hc = 0
+kc = 0
+
+# Radius of the ring
+R = 100
+
+# Radius of each small circle
+r = 20
+
+# Number of circles
+n = 12
+
+# Angle for drawing a circle
+theta = np.linspace(0, 2 * np.pi, 300)
+
+# Draw circles around the ring
+for i in range(n):
+
+    # Calculate center of each small circle
+    hi = hc + R * np.cos(2 * np.pi * i / n)
+    ki = kc + R * np.sin(2 * np.pi * i / n)
+
+    # Circle equation
+    x = hi + r * np.cos(theta)
+    y = ki + r * np.sin(theta)
+
+    plt.plot(x, y)
+
+# Draw center circle
+x = hc + r * np.cos(theta)
+y = kc + r * np.sin(theta)
+plt.plot(x, y)
+
+# Graph settings
+plt.axis("equal")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Ring of Circles")
+plt.grid(True)
+
+plt.show()
