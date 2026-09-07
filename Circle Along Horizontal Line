@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Radius
+r = 50
+
+# Center positions
+hi_values = [-200, -100, 0, 100, 200]
+
+# Angle
+theta = np.linspace(0, 2 * np.pi, 500)
+
+# Draw circles
+for hi in hi_values:
+    x = hi + r * np.cos(theta)
+    y = r * np.sin(theta)
+
+    plt.plot(x, y, label=f"h = {hi}")
+
+# Draw horizontal line y = 0
+plt.axhline(0)
+
+# Equal scale
+plt.axis("equal")
+
+# Labels and title
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Circles Along Horizontal Line")
+
+plt.grid(True)
+plt.legend()
+
+# Show graph
+plt.show()
